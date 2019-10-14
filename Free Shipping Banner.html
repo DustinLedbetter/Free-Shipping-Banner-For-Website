@@ -1,0 +1,172 @@
+
+<!-- Free Shipping Banner by Dustin Ledbetter Created 8-29-2019 -->
+<!-- Notes to help: 
+     1. The HTML and JavaScript are here below this comment.
+     2. The CSS is located inside of this path: wwwroot/App_Themes/Duckgear/styles.css 
+     3. The database call to get the user's cart value and to add it to a cookie for use by our script here is located here: wwwroot/ConLib/StoreHeader.ascx.cs
+	 
+-->
+
+<!-- HTML Section -->
+<div id="freeShippingBanner" class="freeShippingShadow">
+
+    <!-- This section is displayed if the user's cart has less than $100 in it -->
+    <div id="oneHundredCheckTotalNo" class="freeShippingText" style="display:none;">
+        
+		<span id="noPartOne" class="freeShippingTextPadding">Only </span>
+		<span id="noAmountLeft" class="freeColor freeShippingTextPadding"></span>
+        <span id="noPartTwo" class="freeShippingTextPadding"> away from getting FREE shipping on your order!</span>
+
+        <!-- Button to lock banner at top of page instead of following user -->
+		<div id="freeShippingButtonNo" class="freeShippingButton close-container" type="button" onclick="toggle_visibility();toggle_position('freeShippingBanner');">
+			<div class="leftright"></div>
+			<div class="rightleft"></div>
+        </div>
+        
+    </div>
+    
+    <!-- This section is displayed if the user's cart has $100 or more in it -->
+    <div id="oneHundredCheckTotalYes" class="freeShippingText" style="display:none;">
+        
+        <span id="yesEntirePart" class="freeShippingTextPadding">Congratulations! You have enough to get FREE shipping on your order!</span>
+        
+        <!-- Button to lock banner at top of page instead of following user -->
+		<div id="freeShippingButtonYes" class="freeShippingButton close-container" type="button" onclick="toggle_visibility();toggle_position('freeShippingBanner');">
+			<div class="leftright"></div>
+			<div class="rightleft"></div>
+        </div>
+        
+	</div>
+		
+</div>
+	
+<!-- Free Shipping Banner Space for page when Banner is floating -->
+<div id="freeShippingBannerSpace" style="display:none;"></div>	
+    
+<!-- Scripts for the Free Shipping Banner (Dynamic site would not allow for easy addition of scripts files. This also keeps code close for future debuggers)-->
+<script>
+
+// Function that checks if we are on the right page first and then displays the right div depending on user's cart value 
+
+// setup on page load first 
+$(document).ready(function(){ 
+
+	(function getPrice() {
+
+		// Set these to display none to ensure reset
+		document.getElementById('oneHundredCheckTotalNo').style.display = "none";
+		document.getElementById('oneHundredCheckTotalYes').style.display = "none";
+			
+		// Check to ensure we are not on these pages first
+		if(window.location.href.indexOf("login.aspx") <= -1 && window.location.href.indexOf("MyAccount.aspx") <= -1 && window.location.href.indexOf("ContactUs.aspx") <= -1) {
+		
+			// Display Free Shipping Banner
+			document.getElementById('freeShippingBannerSpace').style.display = "block";
+
+			// Get cookie value that contains cart subtotal value
+			var cartPrice = getCookie("FSCartPrice")
+			
+			// Turn it into a number
+			var CheckNumVal1 = Number(cartPrice);
+
+			// If less than $100 we set amount left to go and show them
+			if(CheckNumVal1 < 100.00) {
+
+				// We have to format the value when we do the calculation or it will return many leading numbers after decimal
+				var AmountLeftToGo = (100.00 - CheckNumVal1).toFixed(2);
+
+				document.getElementById("noAmountLeft").innerText = "$" + AmountLeftToGo;
+				
+				var link1 = document.getElementById('oneHundredCheckTotalNo');
+				link1.style.display = "block";
+			}
+			// We inform them they have enough already
+			else {
+					
+				var link2 = document.getElementById('oneHundredCheckTotalYes');
+				link2.style.display = "block";			
+			}
+		}
+		
+	})() // added () at end to make this a self calling function on the page
+
+	
+	// Check to ensure we are on these pages first
+	if(window.location.href.indexOf("login.aspx") > -1 || window.location.href.indexOf("MyAccount.aspx") > -1 || window.location.href.indexOf("ContactUs.aspx") > -1) {
+
+		document.getElementById('headerNavigation').style.top = "-47px";
+		document.getElementById('dlLogoSpace').style.top = "65px";
+		document.getElementById('outerPageContainer').style.background = "url(images/bkgd_bar.jpg) top left repeat-x";
+	}
+		
+});
+ 
+ function getPrice2() {
+
+		// Set these to display none to ensure reset
+		document.getElementById('oneHundredCheckTotalNo').style.display = "none";
+		document.getElementById('oneHundredCheckTotalYes').style.display = "none";
+	
+		// Get cookie value that contains cart subtotal value
+		var cartPrice2 = getCookie("FSCartPrice")
+		
+		// Turn it into a number
+		var CheckNumVal2 = Number(cartPrice2);
+
+		// If less than $100 we set amount left to go and show them
+		if(CheckNumVal2 < 100.00) {
+
+			// We have to format the value when we do the calculation or it will return many leading numbers after decimal
+			var AmountLeftToGo2 = (100.00 - CheckNumVal2).toFixed(2);
+
+			document.getElementById("noAmountLeft").innerText = "$" + AmountLeftToGo2;
+			
+			var link3 = document.getElementById('oneHundredCheckTotalNo');
+			link3.style.display = "block";
+		}
+		// We inform them they have enough already
+		else {
+				
+			var link4 = document.getElementById('oneHundredCheckTotalYes');
+			link4.style.display = "block";			
+		}
+		
+	}
+ 
+// Used to get the value in the cookie
+function getCookie(name) {
+    var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return v ? v[2] : null;
+}
+
+// Used to lock banner at top when button in banner is clicked
+function toggle_position(id) {
+    var e = document.getElementById(id);
+    if(e.style.position == "initial")
+    {
+	    e.style.position = "fixed";
+    }
+    else
+    {
+        e.style.position = "initial";
+    }
+}
+
+// Used to hide the space we had at top when banner is floating when we lock banner at top when button in banner is clicked
+function toggle_visibility() {
+    if(document.getElementById('freeShippingBanner').style.position = "fixed")
+    {
+        document.getElementById('freeShippingBannerSpace').style.display = "none";
+        document.getElementById('freeShippingButtonYes').style.display = "none";
+        document.getElementById('freeShippingButtonNo').style.display = "none";
+		document.getElementById('headerNavigation').style.top = "-52px";
+		document.getElementById('dlLogoSpace').style.top = "65px";
+		
+    }
+    else if (document.getElementById('freeShippingBanner').style.position = "initial")
+    {
+    document.getElementById('freeShippingBannerSpace').style.display = "block";
+    }
+}
+</script>
+<!-- End Free Shipping Banner Code -->

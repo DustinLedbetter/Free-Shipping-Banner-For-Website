@@ -1,0 +1,106 @@
+
+
+/*
+START OF FREE SHIPPING BANNER CODE
+*/
+
+/* Free Shipping Banner Close Button Specific CSS*/
+.close-container{
+  position: inline;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+  margin-top: -10px; 
+  cursor: pointer;
+}
+.leftright{
+  height: 4px;
+  width: 25px;
+  position: absolute;
+  margin-top: 24px;
+  margin-left: 15px; 
+  background-color: #F4A259;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all .3s ease-in;
+}
+.rightleft{
+  height: 4px;
+  width: 25px;
+  position: absolute;
+  margin-top: 24px;
+  margin-left: 15px; 
+  background-color: #F4A259;
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all .3s ease-in;
+}
+.close-container:hover .leftright{
+  transform: rotate(-45deg);
+  background-color: #F25C66;
+}
+.close-container:hover .rightleft{
+  transform: rotate(45deg);
+  background-color: #F25C66;
+}
+
+/* Free Shipping Banner Specific CSS */
+/* Created on 8-29-2019 by Dustin Ledbetter*/
+/*
+// Duckgear new colors for banner 9/23/2019
+
+Lime Green:    #d9de3d
+Brighter Blue: #00afd4  //brightness of set to 115%
+
+// Old colors for banner from 9/19/2019
+
+Blue:          #00A7E1
+Orange/Yellow: #FAA916 //brightness of set to 125%
+*/
+#freeShippingBanner
+{
+	position: fixed;
+	min-width: 960px;
+	max-width: 1520px;
+	z-index: 1500;
+	background-color: #d9de3d;
+	color: #FFFFFF;
+	text-align: center;
+	font-size:24px;
+	font-weight: 500;
+	font-family: 'Arial';
+}
+#freeShippingBannerSpace
+{
+    display: block;
+	padding: 29px;
+}
+.freeColor
+{
+	/*color:#f89728;*/
+	color:#00afd4;
+	filter: brightness(115%);
+	font-weight: 900;
+	font-size:30px;
+}
+.freeShippingButton
+{
+	float: right;
+}
+.freeShippingShadow
+{
+	-webkit-box-shadow: 0 2px 2px -1px grey;
+	   -moz-box-shadow: 0 2px 2px -1px grey;
+	        box-shadow: 0 2px 2px -1px grey;
+			
+	-webkit-border-radius: 2px;
+	   -moz-border-radius: 2px;
+			border-radius: 2px;
+}
+.freeShippingText{
+	padding: 12px 0px 12px 0px;
+}
+
+/*
+END OF FREE SHIPPING BANNER CODE
+*/

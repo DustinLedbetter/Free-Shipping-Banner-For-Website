@@ -1,0 +1,13 @@
+This exists to state that there are other pieces that need to be built to use this banner in able commerce R5. You can message me to enquire about them if you'd like. I am just giving some tips in here about the rest of what needs to be done.
+
+
+* Pages that need to be updated for an Able Commerce Site: 
+
+The update cart, delete item, and add item buttons on several pages need to have the code updated to call the update banner code
+
+pages:
+------
+1. Basket.aspx
+2. BuyProductsDialog.ascx
+3. MiniBasket.ascx
+4. StoreHeader.ascx needs to be updated to make the cookie function work as well 
